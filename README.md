@@ -3,8 +3,8 @@
 ###### Introduction
 
 This project is part of the Design and Analysis of Algorithms course and focuses on
-generating a comprehensive dataset to analyze the efficiency of various sorting algorithms. 
-The primary objective is to create 180 text files populated with random integers within
+generating a dataset to analyze the efficiency of various sorting algorithms. 
+The primary objective is to create 270 text files populated with random integers within
 the range [0 - 10,000), and then apply different sorting techniques to evaluate their
 performance under various conditions.
 
@@ -14,7 +14,7 @@ performance under various conditions.
 - Medium files: Each containing 100,000 integers.
 - Large files: Each containing 1,000,000 integers.
 
-In total, each category consists of 90 files, split into three equal parts based on their
+In total, each category consists of 90 files (total 270), split into three equal parts based on their
 sorting order:
 
 - Unsorted: Files in their original, unsorted state.
