@@ -41,7 +41,7 @@ Note: When sorted, the sorted order is considered (Low to High)
 Step by step process on how to run this program.
 
 ###### First generate the files:
-	python3 ./textFileGenerator.py
+	python3 ./datasetGenerator.py
 
 This will create and fill the text_files folder heirarchy with the dataset (270 generated text files).
 
