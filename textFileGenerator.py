@@ -109,7 +109,7 @@ def generateSmallReverseSorted(smallDirSorted):
         
         reverseSortedIntegers = sorted(integers, reverse = True)
         
-        fileName = f"sm_reverseSorted_{i + 1}.txt"
+        fileName = f"sm_reverse_sorted_{i + 1}.txt"
         filePath = os.path.join(smallDirReverseSorted, fileName)
         
         with open(filePath, 'w') as file:
@@ -180,7 +180,7 @@ def generateMediumReverseSorted(mediumDirSorted):
         
         reverseSortedIntegers = sorted(integers, reverse = True)
         
-        fileName = f"md_reverseSorted_{i + 1}.txt"
+        fileName = f"md_reverse_sorted_{i + 1}.txt"
         filePath = os.path.join(mediumDirReverseSorted, fileName)
         
         with open(filePath, 'w') as file:
@@ -251,7 +251,7 @@ def generateLargeReverseSorted(largeDirSorted):
         
         reverseSortedIntegers = sorted(integers, reverse = True)
         
-        fileName = f"lg_reverseSorted_{i + 1}.txt"
+        fileName = f"lg_reverse_sorted_{i + 1}.txt"
         filePath = os.path.join(largeDirReverseSorted, fileName)
         
         with open(filePath, 'w') as file:
