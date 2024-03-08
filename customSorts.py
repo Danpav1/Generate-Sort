@@ -20,7 +20,7 @@ def run():
 
 # Creates the results folder heirarchy
 def createResultsFiles():
-  resultsDir = "Generate-Sort/results"
+  resultsDir = "results"
   folders = ["small", "medium", "large"]
   subFolders = ["unsorted", "sorted", "reverse_sorted"]
   
@@ -41,8 +41,8 @@ def createResultsFiles():
 # Reads the input text files and puts all data into list, calls appropriate sorts with list as param, then writes
 # execution times of said sorts into respective results file
 def handleTextFiles():
-  readDir = "Generate-Sort/dataset"
-  writeDir = "Generate-Sort/results"
+  readDir = "dataset"
+  writeDir = "results"
   folders = ["small", "medium", "large"]
   subFolders = ["unsorted", "sorted", "reverse_sorted"]
   
