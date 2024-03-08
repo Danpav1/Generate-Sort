@@ -5,6 +5,8 @@
 
 import os
 import random
+import time
+
 from multiprocessing import Process
 
 # Main method
@@ -16,6 +18,9 @@ def main():
 # 270 text files.
 def runGenerator():
   print("Generating...")
+  
+  # Record the start time
+  startTime = time.perf_counter()
     
   # Create processes 
   generateSmallProcess = Process(target=generateSmallUnsorted)
@@ -32,8 +37,14 @@ def runGenerator():
   generateMediumProcess.join()
   generateLargeProcess.join()
   
+  # Record the end time
+  endTime = time.perf_counter()
+  
+  # Calculate the difference in time in milliseconds
+  runTimeS = (endTime - startTime)
+  runTimeMS = runTimeS * 1000
   print("All files done.")
-  return
+  print(f"Execution time: {runTimeMS:.2f} ms or {runTimeS:.2f} sec")
 
 # Generates unsorted text files in our directory and fills them with 10,000 numbers in range
 # 0 <= x <= 9,999.
