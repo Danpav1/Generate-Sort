@@ -38,10 +38,14 @@ Note: When sorted, the sorted order is considered (Low to High)
 
 Step by step process on how to run this program.
 
-First generate the files:
+###### First generate the files:
 	python3 ./textFileGenerator.py
 
-Then sort the files and measure their efficiency:
+This will create and fill the text_files folder heirarchy with the 270 generated text files.
+
+###### Then sort the files and measure their efficiency:
 	python3 ./customSorts.py
+
+This will create and fill the results folder heirarchy with the results of the tests run against the 270 input files.
 
 
