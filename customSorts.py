@@ -27,9 +27,9 @@ def processTextFiles():
     for size in sizes:
         for sortType in types:
             for i in range(1, 31):
-                file_name = f"{size}_{sortType}_{i}.txt"
-                file_path = os.path.join(readDir, size, sortType, file_name)
-                with open(file_path, 'r') as file:
+                fileName = f"{size}_{sortType}_{i}.txt"
+                filePath = os.path.join(readDir, size, sortType, fileName)
+                with open(filePath, 'r') as file:
                     integers = [int(num) for num in file.read().split()]
                 
                 start_time = time.time()
@@ -47,15 +47,15 @@ def processTextFiles():
 
 # Sorts a list of integers using quicksort
 def quickSort(integers):
-  print("Quicksort")
+  sorted(integers) # Test implementation
 
 # Sorts a list of integers using mergesort
 def mergeSort(integers):
-  print("Mergesort")
+  sorted(integers) # Test implementation
 
 # Sorts a list of integers using heapsort
 def heapSort(integers):
-  print("Heapsort")
+  sorted(integers) # Test implementation
 
 # Check if being run directly or imported
 if __name__ == "__main__":
