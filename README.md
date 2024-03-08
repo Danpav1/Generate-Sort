@@ -40,11 +40,11 @@ Note: When sorted, the sorted order is considered (Low to High)
 
 Step by step process on how to run this program.
 
+###### Change directory to the desired repository location:
+	cd the/project/directory/here
+
 ###### Clone the repository:
 	git clone https://github.com/Danpav1/Generate-Sort.git
-
-###### Change directory to the repository:
-	cd the/project/directory/here
 
 ###### Create virtual environment and activate it:
 	# For macOS and Linux
