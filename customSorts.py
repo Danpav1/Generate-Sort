@@ -20,7 +20,7 @@ def run():
 
 # Creates the results folder heirarchy
 def createResultsFiles():
-  resultsDir = "/Users/danielpavenko/university/SPRING2024/Algo/P1/results"
+  resultsDir = "Generate-Sort/results"
   folders = ["small", "medium", "large"]
   subFolders = ["unsorted", "sorted", "reverse_sorted"]
   
@@ -41,19 +41,18 @@ def createResultsFiles():
 # Reads the input text files and puts all data into list, calls appropriate sorts with list as param, then writes
 # execution times of said sorts into respective results file
 def handleTextFiles():
-  readDir = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset"
-  writeDir = "/Users/danielpavenko/university/SPRING2024/Algo/P1/results"
+  readDir = "Generate-Sort/dataset"
+  writeDir = "Generate-Sort/results"
   folders = ["small", "medium", "large"]
   subFolders = ["unsorted", "sorted", "reverse_sorted"]
-  fileSizeName = ["sm", "md", "lg"]
   
   # Reads
-  for idx, folder in enumerate(folders):
+  for folder in folders:
     folderPath = os.path.join(readDir, folder)
     for subFolder in subFolders:
       subFolderPath = os.path.join(folderPath, subFolder)
       for i in range(30):
-        fileName = f"{fileSizeName[idx]}_{subFolder}_{i + 1}.txt"
+        fileName = f"{folder}_{subFolder}_{i + 1}.txt"
         filePath = os.path.join(subFolderPath, fileName)
         with open(filePath, 'r') as file:
           content = file.read()

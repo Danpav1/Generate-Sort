@@ -42,7 +42,7 @@ def runGenerator():
 
 # Generates files based on the size (small, medium, large) and count (number of integers in file) given to it
 def generateFiles(size, count):
-    baseDir = f"/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/{size}"
+    baseDir = f"Generate-Sort/dataset/{size}"
     makeDirectory(baseDir)
 
     # Creates folder heirarchy
