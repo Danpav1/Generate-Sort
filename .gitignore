@@ -1,0 +1,6 @@
+# Ignore all generated files
+dataset
+results
+
+# Ignore Virtual Environment
+.venv
