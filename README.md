@@ -21,6 +21,8 @@ sorting order:
 - Sorted (High to Low): Files sorted in descending order.
 - Sorted (Low to High): Files sorted in ascending order.
 
+The files within this dataset will be used as input for the custom sort implementations.
+
 ###### Sorting Algorithms
 
 The files generated will be sorted using the following custom algorithms to benchmark their
@@ -30,7 +32,11 @@ efficiency:
 - Mergesort
 - Heapsort
 
+Note: When sorted, the sorted order is considered (Low to High)
+
 ###### Usage
+
+Step by step process on how to run this program.
 
 First generate the files:
 	python3 ./textFileGenerator.py
