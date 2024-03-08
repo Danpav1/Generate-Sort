@@ -42,6 +42,6 @@ First generate the files:
 	python3 ./textFileGenerator.py
 
 Then sort the files and measure their efficiency:
-	python3 ./-
+	python3 ./customSorts.py
 
 
