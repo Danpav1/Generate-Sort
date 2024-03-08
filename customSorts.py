@@ -27,23 +27,39 @@ def processTextFiles():
     for size in sizes:
         for sortType in types:
             for i in range(1, 31):
-                fileName = f"{size}_{sortType}_{i}.txt"
-                filePath = os.path.join(readDir, size, sortType, fileName)
-                with open(filePath, 'r') as file:
+                readFileName = f"{size}_{sortType}_{i}.txt"
+                readFilePath = os.path.join(readDir, size, sortType, readFileName)
+                writeFileName = f"{size}_{sortType}_results.txt"
+                writeFilePath = os.path.join(writeDir, size, sortType, writeFileName)
+                
+                with open(readFilePath, 'r') as file:
                     integers = [int(num) for num in file.read().split()]
                 
-                start_time = time.time()
+                # Overwrites old data
+                if (i == 1):
+                  with open(writeFilePath, 'w'):
+                    pass
+                
+                startTime = time.perf_counter()
                 quickSort(integers)
-                duration = time.time() - start_time
-                # -- write to file logic here, method call maybe? --     
-                start_time = time.time()
+                endTime = time.perf_counter()
+                runTimeMS = (endTime - startTime) * 1000
+                with open(writeFilePath, 'a') as file:
+                  file.write(f"quickSort - {readFileName} - {runTimeMS:.4f}\n")
+                    
+                startTime = time.perf_counter()
                 mergeSort(integers)
-                duration = time.time() - start_time
-                # -- write to file logic here, method call maybe? --   
-                start_time = time.time()
+                endTime = time.perf_counter()
+                runTimeMS = (endTime - startTime) * 1000
+                with open(writeFilePath, 'a') as file:
+                  file.write(f"mergeSort - {readFileName} - {runTimeMS:.4f}\n")  
+                  
+                startTime = time.perf_counter()
                 heapSort(integers)
-                duration = time.time() - start_time
-                # -- write to file logic here, method call maybe? --  
+                endTime = time.perf_counter()
+                runTimeMS = (endTime - startTime) * 1000
+                with open(writeFilePath, 'a') as file:
+                  file.write(f"heapSort - {readFileName} - {runTimeMS:.4f}\n\n")
 
 # Sorts a list of integers using quicksort
 def quickSort(integers):
