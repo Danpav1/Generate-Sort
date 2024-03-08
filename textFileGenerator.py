@@ -49,7 +49,7 @@ def runGenerator():
 # Generates unsorted text files in our directory and fills them with 10,000 numbers in range
 # 0 <= x <= 9,999.
 def generateSmallUnsorted():
-    smallDirUnsorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/text_files/small/unsorted"
+    smallDirUnsorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/small/unsorted"
     
     if not os.path.exists(smallDirUnsorted):
         os.makedirs(smallDirUnsorted)
@@ -67,7 +67,7 @@ def generateSmallUnsorted():
     
 # Duplicates, sorts and places the now sorted files into new directory
 def generateSmallSorted(smallDirUnsorted):
-    smallDirSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/text_files/small/sorted"
+    smallDirSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/small/sorted"
     
     if not os.path.exists(smallDirSorted):
         os.makedirs(smallDirSorted)
@@ -94,7 +94,7 @@ def generateSmallSorted(smallDirUnsorted):
     
 # Duplicates, reverse sorts and places the now reverse sorted files into new directory
 def generateSmallReverseSorted(smallDirSorted):
-    smallDirReverseSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/text_files/small/reverse_sorted"
+    smallDirReverseSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/small/reverse_sorted"
     
     if not os.path.exists(smallDirReverseSorted):
         os.makedirs(smallDirReverseSorted)
@@ -120,7 +120,7 @@ def generateSmallReverseSorted(smallDirSorted):
 # Generates unsorted text files in our directory and fills them with 100,000 numbers in range
 # 0 <= x <= 9,999.
 def generateMediumUnsorted():
-    mediumDirUnsorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/text_files/medium/unsorted"
+    mediumDirUnsorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/medium/unsorted"
     
     if not os.path.exists(mediumDirUnsorted):
         os.makedirs(mediumDirUnsorted)
@@ -138,7 +138,7 @@ def generateMediumUnsorted():
     
 # Duplicates, sorts and places the now sorted files into new directory
 def generateMediumSorted(mediumDirUnsorted):
-    mediumDirSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/text_files/medium/sorted"
+    mediumDirSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/medium/sorted"
     
     if not os.path.exists(mediumDirSorted):
         os.makedirs(mediumDirSorted)
@@ -165,7 +165,7 @@ def generateMediumSorted(mediumDirUnsorted):
     
 # Duplicates, reverse sorts and places the now reverse sorted files into new directory
 def generateMediumReverseSorted(mediumDirSorted):
-    mediumDirReverseSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/text_files/medium/reverse_sorted"
+    mediumDirReverseSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/medium/reverse_sorted"
     
     if not os.path.exists(mediumDirReverseSorted):
         os.makedirs(mediumDirReverseSorted)
@@ -191,7 +191,7 @@ def generateMediumReverseSorted(mediumDirSorted):
 # Generates unsorted text files in our directory and fills them with 1,000,000 numbers in range
 # 0 <= x <= 9,999.
 def generateLargeUnsorted():
-    largeDirUnsorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/text_files/large/unsorted"
+    largeDirUnsorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/large/unsorted"
     
     if not os.path.exists(largeDirUnsorted):
         os.makedirs(largeDirUnsorted)
@@ -209,7 +209,7 @@ def generateLargeUnsorted():
     
 # Duplicates, sorts and places the now sorted files into new directory
 def generateLargeSorted(largeDirUnsorted):
-    largeDirSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/text_files/large/sorted"
+    largeDirSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/large/sorted"
     
     if not os.path.exists(largeDirSorted):
         os.makedirs(largeDirSorted)
@@ -236,7 +236,7 @@ def generateLargeSorted(largeDirUnsorted):
     
 # Duplicates, reverse sorts and places the now reverse sorted files into new directory
 def generateLargeReverseSorted(largeDirSorted):
-    largeDirReverseSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/text_files/large/reverse_sorted"
+    largeDirReverseSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/large/reverse_sorted"
     
     if not os.path.exists(largeDirReverseSorted):
         os.makedirs(largeDirReverseSorted)
