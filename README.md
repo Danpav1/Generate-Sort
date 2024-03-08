@@ -40,7 +40,22 @@ Note: When sorted, the sorted order is considered (Low to High)
 
 Step by step process on how to run this program.
 
-###### First generate the files:
+###### Clone the repository:
+	git clone https://github.com/Danpav1/Generate-Sort.git
+
+###### Change directory to the repository:
+	cd the/project/directory/here
+
+###### Create virtual environment and activate it:
+	# For macOS and Linux
+ 	python3 -m venv .venv
+  	source .venv/bin/activate
+
+   	# For Windows
+    	python -m venv .venv
+     	.\.venv\Scripts\activate
+
+###### Generate the dataset:
 	python3 ./datasetGenerator.py
 
 This will create and fill the text_files folder heirarchy with the dataset (270 generated text files).
