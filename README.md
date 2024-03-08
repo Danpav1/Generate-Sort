@@ -10,6 +10,8 @@ performance under various conditions.
 
 ## Dataset Overview
 
+All files in the dataset are text files (.txt)
+
 - Small files: Each containing 10,000 integers.
 - Medium files: Each containing 100,000 integers.
 - Large files: Each containing 1,000,000 integers.
@@ -41,11 +43,11 @@ Step by step process on how to run this program.
 ###### First generate the files:
 	python3 ./textFileGenerator.py
 
-This will create and fill the text_files folder heirarchy with the 270 generated text files.
+This will create and fill the text_files folder heirarchy with the dataset (270 generated text files).
 
 ###### Then sort the files and measure their efficiency:
 	python3 ./customSorts.py
 
-This will create and fill the results folder heirarchy with the results of the tests run against the 270 input files.
+This will create and fill the results folder heirarchy with the results of the tests run against the dataset.
 
 
