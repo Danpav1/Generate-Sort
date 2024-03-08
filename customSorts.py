@@ -46,7 +46,6 @@ def handleTextFiles():
   folders = ["small", "medium", "large"]
   subFolders = ["unsorted", "sorted", "reverse_sorted"]
   fileSizeName = ["sm", "md", "lg"]
-  count = 0
   
   # Reads
   for idx, folder in enumerate(folders):

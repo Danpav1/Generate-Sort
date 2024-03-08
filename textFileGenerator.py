@@ -6,260 +6,82 @@
 import os
 import random
 import time
-
 from multiprocessing import Process
 
 # Main method
 def main():
-  runGenerator()
-  return
+    runGenerator()
 
-# Calls generateSmall, generateMedium and generateLarge in parallel to create a total of
-# 270 text files.
+# Starts the process(es) and runs generateFiles with appropriate inputs in parallel
 def runGenerator():
-  print("Generating...")
-  
-  # Record the start time
-  startTime = time.perf_counter()
-    
-  # Create processes 
-  generateSmallProcess = Process(target=generateSmallUnsorted)
-  generateMediumProcess = Process(target=generateMediumUnsorted)
-  generateLargeProcess = Process(target=generateLargeUnsorted)
-  
-  # Start processes
-  generateSmallProcess.start()
-  generateMediumProcess.start()
-  generateLargeProcess.start()
-  
-  # Wait for processes to complete
-  generateSmallProcess.join()
-  generateMediumProcess.join()
-  generateLargeProcess.join()
-  
-  # Record the end time
-  endTime = time.perf_counter()
-  
-  # Calculate the difference in time in milliseconds
-  runTimeS = (endTime - startTime)
-  runTimeMS = runTimeS * 1000
-  print("All files done.")
-  print(f"Execution time: {runTimeMS:.2f} ms or {runTimeS:.2f} sec")
+    print("Generating...")
 
-# Generates unsorted text files in our directory and fills them with 10,000 numbers in range
-# 0 <= x <= 9,999.
-def generateSmallUnsorted():
-    smallDirUnsorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/small/unsorted"
-    
-    if not os.path.exists(smallDirUnsorted):
-        os.makedirs(smallDirUnsorted)
-    
-    for i in range(30):
-        fileName = f"sm_unsorted_{i + 1}.txt"
-        filePath = os.path.join(smallDirUnsorted, fileName)
-        with open(filePath, 'w') as file:
-            integers = [str(random.randint(0, 9999)) for _ in range(10000)]
-            file.write(" ".join(integers))
-            
-    print("\tUnsorted small files done.")
-    
-    generateSmallSorted(smallDirUnsorted)
-    
-# Duplicates, sorts and places the now sorted files into new directory
-def generateSmallSorted(smallDirUnsorted):
-    smallDirSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/small/sorted"
-    
-    if not os.path.exists(smallDirSorted):
-        os.makedirs(smallDirSorted)
-    
-    for i in range(30):
-        fileName = f"sm_unsorted_{i + 1}.txt"
-        filePath = os.path.join(smallDirUnsorted, fileName)
-        with open(filePath, 'r') as file:
-          content = file.read()
-          
-        integers = [int(i) for i in content.split()]
-        
-        sortedIntegers = sorted(integers)
-        
-        fileName = f"sm_sorted_{i + 1}.txt"
-        filePath = os.path.join(smallDirSorted, fileName)
-        
-        with open(filePath, 'w') as file:
-            file.write(' '.join(map(str, sortedIntegers)))
-          
-    print("\tSorted small files done.")  
-  
-    generateSmallReverseSorted(smallDirSorted)
-    
-# Duplicates, reverse sorts and places the now reverse sorted files into new directory
-def generateSmallReverseSorted(smallDirSorted):
-    smallDirReverseSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/small/reverse_sorted"
-    
-    if not os.path.exists(smallDirReverseSorted):
-        os.makedirs(smallDirReverseSorted)
-    
-    for i in range(30):
-        fileName = f"sm_sorted_{i + 1}.txt"
-        filePath = os.path.join(smallDirSorted, fileName)
-        with open(filePath, 'r') as file:
-          content = file.read()
-          
-        integers = [int(i) for i in content.split()]
-        
-        reverseSortedIntegers = sorted(integers, reverse = True)
-        
-        fileName = f"sm_reverse_sorted_{i + 1}.txt"
-        filePath = os.path.join(smallDirReverseSorted, fileName)
-        
-        with open(filePath, 'w') as file:
-            file.write(' '.join(map(str, reverseSortedIntegers)))
-           
-    print("\tReverse sorted small files done.\n")
+    startTime = time.perf_counter()
 
-# Generates unsorted text files in our directory and fills them with 100,000 numbers in range
-# 0 <= x <= 9,999.
-def generateMediumUnsorted():
-    mediumDirUnsorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/medium/unsorted"
-    
-    if not os.path.exists(mediumDirUnsorted):
-        os.makedirs(mediumDirUnsorted)
-    
-    for i in range(30):
-        fileName = f"md_unsorted_{i + 1}.txt"
-        filePath = os.path.join(mediumDirUnsorted, fileName)
-        with open(filePath, 'w') as file:
-            integers = [str(random.randint(0, 9999)) for _ in range(100000)]
-            file.write(" ".join(integers))
-            
-    print("\tUnsorted medium files done.")
-    
-    generateMediumSorted(mediumDirUnsorted)
-    
-# Duplicates, sorts and places the now sorted files into new directory
-def generateMediumSorted(mediumDirUnsorted):
-    mediumDirSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/medium/sorted"
-    
-    if not os.path.exists(mediumDirSorted):
-        os.makedirs(mediumDirSorted)
-    
-    for i in range(30):
-        fileName = f"md_unsorted_{i + 1}.txt"
-        filePath = os.path.join(mediumDirUnsorted, fileName)
-        with open(filePath, 'r') as file:
-          content = file.read()
-          
-        integers = [int(i) for i in content.split()]
-        
-        sortedIntegers = sorted(integers)
-        
-        fileName = f"md_sorted_{i + 1}.txt"
-        filePath = os.path.join(mediumDirSorted, fileName)
-        
-        with open(filePath, 'w') as file:
-            file.write(' '.join(map(str, sortedIntegers)))
-          
-    print("\tSorted medium files done.")  
-  
-    generateMediumReverseSorted(mediumDirSorted)
-    
-# Duplicates, reverse sorts and places the now reverse sorted files into new directory
-def generateMediumReverseSorted(mediumDirSorted):
-    mediumDirReverseSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/medium/reverse_sorted"
-    
-    if not os.path.exists(mediumDirReverseSorted):
-        os.makedirs(mediumDirReverseSorted)
-    
-    for i in range(30):
-        fileName = f"md_sorted_{i + 1}.txt"
-        filePath = os.path.join(mediumDirSorted, fileName)
-        with open(filePath, 'r') as file:
-          content = file.read()
-          
-        integers = [int(i) for i in content.split()]
-        
-        reverseSortedIntegers = sorted(integers, reverse = True)
-        
-        fileName = f"md_reverse_sorted_{i + 1}.txt"
-        filePath = os.path.join(mediumDirReverseSorted, fileName)
-        
-        with open(filePath, 'w') as file:
-            file.write(' '.join(map(str, reverseSortedIntegers)))
-           
-    print("\tReverse sorted medium files done.\n")
-    
-# Generates unsorted text files in our directory and fills them with 1,000,000 numbers in range
-# 0 <= x <= 9,999.
-def generateLargeUnsorted():
-    largeDirUnsorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/large/unsorted"
-    
-    if not os.path.exists(largeDirUnsorted):
-        os.makedirs(largeDirUnsorted)
-    
-    for i in range(30):
-        fileName = f"lg_unsorted_{i + 1}.txt"
-        filePath = os.path.join(largeDirUnsorted, fileName)
-        with open(filePath, 'w') as file:
-            integers = [str(random.randint(0, 9999)) for _ in range(1000000)]
-            file.write(" ".join(integers))
-            
-    print("\tUnsorted large files done.")
-    
-    generateLargeSorted(largeDirUnsorted)
-    
-# Duplicates, sorts and places the now sorted files into new directory
-def generateLargeSorted(largeDirUnsorted):
-    largeDirSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/large/sorted"
-    
-    if not os.path.exists(largeDirSorted):
-        os.makedirs(largeDirSorted)
-    
-    for i in range(30):
-        fileName = f"lg_unsorted_{i + 1}.txt"
-        filePath = os.path.join(largeDirUnsorted, fileName)
-        with open(filePath, 'r') as file:
-          content = file.read()
-          
-        integers = [int(i) for i in content.split()]
-        
-        sortedIntegers = sorted(integers)
-        
-        fileName = f"lg_sorted_{i + 1}.txt"
-        filePath = os.path.join(largeDirSorted, fileName)
-        
-        with open(filePath, 'w') as file:
-            file.write(' '.join(map(str, sortedIntegers)))
-          
-    print("\tSorted large files done.")  
-  
-    generateLargeReverseSorted(largeDirSorted)
-    
-# Duplicates, reverse sorts and places the now reverse sorted files into new directory
-def generateLargeReverseSorted(largeDirSorted):
-    largeDirReverseSorted = "/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/large/reverse_sorted"
-    
-    if not os.path.exists(largeDirReverseSorted):
-        os.makedirs(largeDirReverseSorted)
-    
-    for i in range(30):
-        fileName = f"lg_sorted_{i + 1}.txt"
-        filePath = os.path.join(largeDirSorted, fileName)
-        with open(filePath, 'r') as file:
-          content = file.read()
-          
-        integers = [int(i) for i in content.split()]
-        
-        reverseSortedIntegers = sorted(integers, reverse = True)
-        
-        fileName = f"lg_reverse_sorted_{i + 1}.txt"
-        filePath = os.path.join(largeDirReverseSorted, fileName)
-        
-        with open(filePath, 'w') as file:
-            file.write(' '.join(map(str, reverseSortedIntegers)))
-           
-    print("\tReverse sorted large files done.")
+    # Inputs used for generateFiles
+    sizes = [("small", 10000), ("medium", 100000), ("large", 1000000)]
+    # Queue of parallel processes
+    processes = []
 
-# Check if being run directly or imported
+    # Start a new process for each entry in sizes, uses the tuple in sizes as input for generateFiles, adds
+    # process to the queue "processes"
+    for size, count in sizes:
+        p = Process(target = generateFiles, args = (size, count))
+        p.start()
+        processes.append(p)
+
+    # Waits for each process in queue to finish
+    for p in processes:
+        p.join()
+
+    endTime = time.perf_counter()
+    runTimeS = (endTime - startTime)
+    runTimeMS = runTimeS * 1000
+    print("All files done.")
+    print(f"Execution time: {runTimeMS:.2f} ms or {runTimeS:.2f} sec")
+
+# Generates files based on the size (small, medium, large) and count (number of integers in file) given to it
+def generateFiles(size, count):
+    baseDir = f"/Users/danielpavenko/university/SPRING2024/Algo/P1/dataset/{size}"
+    makeDirectory(baseDir)
+
+    # Creates folder heirarchy
+    unsortedDir = os.path.join(baseDir, "unsorted")
+    sortedDir = os.path.join(baseDir, "sorted")
+    reverseSortedDir = os.path.join(baseDir, "reverse_sorted")
+    makeDirectory(unsortedDir)
+    makeDirectory(sortedDir)
+    makeDirectory(reverseSortedDir)
+
+    # Creates the files and fills them with appropriate data
+    for i in range(1, 31):
+        # Unsorted
+        nums = [str(random.randint(0, 9999)) for _ in range(count)]
+        filePath = os.path.join(unsortedDir, f"{size}_unsorted_{i}.txt")
+        writeNumbersToFile(filePath, nums)
+
+        # Sorted (Low to High)
+        sortedNums = sorted(nums)
+        sortedFilePath = os.path.join(sortedDir, f"{size}_sorted_{i}.txt")
+        writeNumbersToFile(sortedFilePath, sortedNums)
+
+        #R Reverse sorted (High to Low)
+        reverseSortedNums = sorted(nums, reverse=True)
+        reverseSortedFilePath = os.path.join(reverseSortedDir, f"{size}_reverse_sorted_{i}.txt")
+        writeNumbersToFile(reverseSortedFilePath, reverseSortedNums)
+
+    print(f"\t{size.capitalize()} files done.\n")
+
+# Helper method that checks if a directory exists and if not, creates the directory
+def makeDirectory(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+# Helper method that writes a list of numbers to a file
+def writeNumbersToFile(filePath, numbers):
+    with open(filePath, 'w') as file:
+        file.write(" ".join(numbers))
+
+# Check if script is getting run directly or imported
 if __name__ == "__main__":
     main()
-      
