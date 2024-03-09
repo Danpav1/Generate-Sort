@@ -54,9 +54,9 @@ Step by step process on how to run this program.
  	python3 -m venv .venv
 	source .venv/bin/activate
 ###### 
-   	# For Windows
+	# For Windows
 	python -m venv .venv
-     	.\.venv\Scripts\activate
+	.\.venv\Scripts\activate
 
 ###### Generate the dataset:
 	python3 ./datasetGenerator.py
