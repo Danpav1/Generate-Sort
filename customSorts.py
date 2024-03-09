@@ -5,6 +5,7 @@
 
 import os
 import time
+import statistics
 
 # Creates the results directory hierarchy
 def createResultsDirectories():
@@ -23,9 +24,10 @@ def processTextFiles():
     writeDir = "results"
     sizes = ["small", "medium", "large"]
     types = ["unsorted", "sorted", "reverse_sorted"]
-  
+    
     for size in sizes:
         for sortType in types:
+            quickSortRunTimes, mergeSortRunTimes, heapSortRunTimes = [], [], []
             for i in range(1, 31):
                 readFileName = f"{size}_{sortType}_{i}.txt"
                 readFilePath = os.path.join(readDir, size, sortType, readFileName)
@@ -40,26 +42,42 @@ def processTextFiles():
                   with open(writeFilePath, 'w'):
                     pass
                 
+                # Quicksort
                 startTime = time.perf_counter()
                 quickSort(integers)
                 endTime = time.perf_counter()
                 runTimeMS = (endTime - startTime) * 1000
+                quickSortRunTimes.append(runTimeMS)
                 with open(writeFilePath, 'a') as file:
-                  file.write(f"quickSort - {readFileName} - {runTimeMS:.4f}\n")
+                  file.write(f"quickSort - {readFileName} - {runTimeMS:.4f} ms\n")
                     
+                # Mergesort
                 startTime = time.perf_counter()
                 mergeSort(integers)
                 endTime = time.perf_counter()
                 runTimeMS = (endTime - startTime) * 1000
+                mergeSortRunTimes.append(runTimeMS)
                 with open(writeFilePath, 'a') as file:
-                  file.write(f"mergeSort - {readFileName} - {runTimeMS:.4f}\n")  
+                  file.write(f"mergeSort - {readFileName} - {runTimeMS:.4f} ms\n")  
                   
+                # Heapsort
                 startTime = time.perf_counter()
                 heapSort(integers)
                 endTime = time.perf_counter()
                 runTimeMS = (endTime - startTime) * 1000
+                heapSortRunTimes.append(runTimeMS)
                 with open(writeFilePath, 'a') as file:
-                  file.write(f"heapSort - {readFileName} - {runTimeMS:.4f}\n\n")
+                  file.write(f"heapSort - {readFileName} - {runTimeMS:.4f} ms\n\n")
+    
+                if (i == 30): # Makes sure we're at the last iteration
+                  # Calculate standard deviation and mean and put them into the results file
+                  with open(writeFilePath, 'a') as file:
+                    file.write(f"quickSort mean: {statistics.mean(quickSortRunTimes):.4f}\n")
+                    file.write(f"mergeSort mean: {statistics.mean(mergeSortRunTimes):.4f}\n")
+                    file.write(f"heapSort mean: {statistics.mean(heapSortRunTimes):.4f}\n")
+                    file.write(f"quickSort stdev: {statistics.stdev(quickSortRunTimes):.4f}\n")
+                    file.write(f"mergeSort stdev: {statistics.stdev(mergeSortRunTimes):.4f}\n")
+                    file.write(f"heapSort stdev: {statistics.stdev(heapSortRunTimes):.4f}\n")
 
 # Sorts a list of integers using quicksort
 def quickSort(integers):
