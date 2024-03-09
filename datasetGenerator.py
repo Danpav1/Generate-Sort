@@ -61,12 +61,12 @@ def generateFiles(size, count):
         writeNumbersToFile(filePath, nums)
 
         # Sorted (Low to High)
-        sortedNums = sorted(nums)
+        sortedNums = sorted(nums, key = int)
         sortedFilePath = os.path.join(sortedDir, f"{size}_sorted_{i}.txt")
         writeNumbersToFile(sortedFilePath, sortedNums)
 
         #R Reverse sorted (High to Low)
-        reverseSortedNums = sorted(nums, reverse=True)
+        reverseSortedNums = sorted(nums, key = int, reverse=True)
         reverseSortedFilePath = os.path.join(reverseSortedDir, f"{size}_reverse_sorted_{i}.txt")
         writeNumbersToFile(reverseSortedFilePath, reverseSortedNums)
 
