@@ -12,9 +12,9 @@ performance under various conditions.
 
 All files in the dataset are text files (.txt)
 
-- Small files: Each containing 10,000 integers.
-- Medium files: Each containing 100,000 integers.
-- Large files: Each containing 1,000,000 integers.
+- Small files: Each containing 10,000 random integers.
+- Medium files: Each containing 100,000 random integers.
+- Large files: Each containing 1,000,000 random integers.
 
 In total, each category consists of 90 files (total 270), split into three equal parts based on their
 sorting order:
@@ -52,27 +52,27 @@ Step by step process on how to run this program.
 ###### Create virtual environment and activate it:
 	# For macOS and Linux
  	python3 -m venv .venv
-  	source .venv/bin/activate
-
+	source .venv/bin/activate
+###### 
    	# For Windows
-    	python -m venv .venv
+	python -m venv .venv
      	.\.venv\Scripts\activate
 
 ###### Generate the dataset:
 	python3 ./datasetGenerator.py
 
-This will create and fill the text_files folder heirarchy with the dataset (270 generated text files).
+This will create and fill the dataset folder heirarchy (270 generated text files).
 
-The dataset folder can be found within the General-Sort folder. The datasets are sorted in size (small, medium, large) and type (unsorted, sorted, reverseSorted).
+The dataset folder can be found at: General-Sort/dataset. The datasets are sorted in size (small, medium, large) and type (unsorted, sorted, reverseSorted).
 
 NOTE: Everytime you generate a new dataset, the old dataset is overwritten.
 
-###### Then sort the files and measure their efficiency:
+###### Then sort the files and measure their time efficiency:
 	python3 ./customSorts.py
 
 This will create and fill the results folder heirarchy with the results of the tests run against the dataset.
 
-The results folder can be found within the General-Sort folder. The results are sorted in dataset input size (small, medium, large) and type (unsorted, sorted, reverseSorted).
+The results folder can be found at: General-Sort/results. The results are sorted in dataset input size (small, medium, large) and dataset input type (unsorted, sorted, reverseSorted).
 
 All of the run time data for each test as well as the overall run time mean and standard deviation is stored at the end of any given results file.
 
