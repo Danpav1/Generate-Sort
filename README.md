@@ -34,7 +34,7 @@ efficiency:
 - Mergesort
 - Heapsort
 
-Note: When sorted, the sorted order is considered (Low to High)
+NOTE: When sorted, the sorted order is considered (Low to High)
 
 ## Usage
 
@@ -63,9 +63,18 @@ Step by step process on how to run this program.
 
 This will create and fill the text_files folder heirarchy with the dataset (270 generated text files).
 
+The dataset folder can be found within the General-Sort folder. The datasets are sorted in size (small, medium, large) and type (unsorted, sorted, reverseSorted).
+
+NOTE: Everytime you generate a new dataset, the old dataset is overwritten.
+
 ###### Then sort the files and measure their efficiency:
 	python3 ./customSorts.py
 
 This will create and fill the results folder heirarchy with the results of the tests run against the dataset.
 
+The results folder can be found within the General-Sort folder. The results are sorted in dataset input size (small, medium, large) and type (unsorted, sorted, reverseSorted).
+
+All of the run time data for each test as well as the overall run time mean and standard deviation is stored at the end of any given results file.
+
+NOTE: Everytime you generate a new dataset and run customSorts, the old results are overwritten.
 
