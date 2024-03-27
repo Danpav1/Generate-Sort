@@ -14,10 +14,6 @@ def main():
 
 # Starts the process(es) and runs generateFiles with appropriate inputs in parallel
 def runGenerator():
-    print("Generating...")
-
-    startTime = time.perf_counter()
-
     # Inputs used for generateFiles
     sizes = [("small", 10000), ("medium", 100000), ("large", 1000000)]
     # Queue of parallel processes
@@ -33,12 +29,6 @@ def runGenerator():
     # Waits for each process in queue to finish
     for p in processes:
         p.join()
-
-    endTime = time.perf_counter()
-    runTimeS = (endTime - startTime)
-    runTimeMS = runTimeS * 1000
-    print("All files done.")
-    print(f"Execution time: {runTimeMS:.2f} ms or {runTimeS:.2f} sec")
 
 # Generates files based on the size (small, medium, large) and count (number of integers in file) given to it
 def generateFiles(size, count):
@@ -65,12 +55,12 @@ def generateFiles(size, count):
         sortedFilePath = os.path.join(sortedDir, f"{size}_sorted_{i}.txt")
         writeNumbersToFile(sortedFilePath, sortedNums)
 
-        #R Reverse sorted (High to Low)
+        # Reverse sorted (High to Low)
         reverseSortedNums = sorted(nums, key = int, reverse=True)
         reverseSortedFilePath = os.path.join(reverseSortedDir, f"{size}_reverse_sorted_{i}.txt")
         writeNumbersToFile(reverseSortedFilePath, reverseSortedNums)
 
-    print(f"\t{size.capitalize()} files done.\n")
+    print(f"\t{size.capitalize()} files done.")
 
 # Helper method that checks if a directory exists and if not, creates the directory
 def makeDirectory(path):
@@ -84,4 +74,12 @@ def writeNumbersToFile(filePath, numbers):
 
 # Check if script is getting run directly or imported
 if __name__ == "__main__":
+    startTime = time.perf_counter()
+    print("Generating...")
     main()
+    print("All files done.")
+    endTime = time.perf_counter()
+    runTimeS = (endTime - startTime)
+    runTimeMin = runTimeS / 60
+    runTimeMS = runTimeS * 1000
+    print(f"Execution time: {runTimeMS:.2f} ms or {runTimeS:.2f} sec or {runTimeMin:.2f} min")

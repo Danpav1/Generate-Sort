@@ -6,9 +6,16 @@
 import os
 import time
 import statistics
+from multiprocessing import Process
+
+# Main method
+def main():
+  createResultsDirectories()
+  processTextFiles()
 
 # Creates the results directory hierarchy
 def createResultsDirectories():
+    print("\tCreating result directories.")
     baseDir = "results"
     sizes = ["small", "medium", "large"]
     types = ["unsorted", "sorted", "reverse_sorted"]
@@ -18,49 +25,51 @@ def createResultsDirectories():
             dirPath = os.path.join(baseDir, size, sortType)
             os.makedirs(dirPath, exist_ok=True)
 
-# Processes text files by sorting them, measuring their efficiency, and writing that measurment to a results file
+# Creates a process for small, medium and large files
 def processTextFiles():
+    sizes = ["small", "medium", "large"]
+    processes = []
+
+    for size in sizes:
+        p = Process(target=processFilesWorker, args=(size,))
+        processes.append(p)
+        p.start()
+
+    for p in processes:
+        p.join()
+
+# Processes text files by sorting them, measuring their efficiency, and writing that measurment to a results file
+def processFilesWorker(size):
+    print(f"\tProcessing and sorting text files for size: {size}")
     readDir = "dataset"
     writeDir = "results"
-    sizes = ["small", "medium", "large"]
     types = ["unsorted", "sorted", "reverse_sorted"]
     sortFunctions = {'quickSort': quickSort, 'mergeSort': mergeSort, 'heapSort': heapSort}
 
-    for size in sizes:
-        for sortType in types:
-            # Dups all keys from sortFunctions and makes values empty lists
-            runTimes = {sortName: [] for sortName in sortFunctions.keys()}
-            # To minimze I/O, we put data into resultContent (instead of writing right as we get the data) and 
-            # write resultContent into the file at the end
-            resultContent = []
+    for sortType in types:
+        runTimes = {sortName: [] for sortName in sortFunctions.keys()}
+        resultContent = []
 
-            # Read and put input data into integer list
-            for i in range(1, 31):
-                fileName = f"{size}_{sortType}_{i}.txt"
-                readFilePath = os.path.join(readDir, size, sortType, fileName)
-                with open(readFilePath, 'r') as file:
-                    integers = [int(num) for num in file.read().split()]
+        for i in range(1, 31):
+            fileName = f"{size}_{sortType}_{i}.txt"
+            readFilePath = os.path.join(readDir, size, sortType, fileName)
+            with open(readFilePath, 'r') as file:
+                integers = [int(num) for num in file.read().split()]
 
-                # Calls sortAndMeasure on integer list, gets return val (runTime) and puts it into the correct key value
-                # pair in runTimes, adds result data line corrresponding to the sort just ran and runTime of that sort 
-                for sortName, sortFunc in sortFunctions.items():
-                    runTimeMS = sortAndMeasure(list(integers), sortFunc)
-                    runTimes[sortName].append(runTimeMS)
-                    if (sortFunc == heapSort):
-                        resultContent.append(f"{sortName} - {fileName} - {runTimeMS:.4f} ms\n\n")
-                    else:
-                      resultContent.append(f"{sortName} - {fileName} - {runTimeMS:.4f} ms\n")
+            for sortName, sortFunc in sortFunctions.items():
+                runTimeMS = sortAndMeasure(list(integers), sortFunc)
+                runTimes[sortName].append(runTimeMS)
+                resultContent.append(f"{sortName} - {fileName} - {runTimeMS:.4f} ms\n")
+            resultContent.append("\n")
 
-            # Calculate and append statistics to the end of the file
-            for sortName, times in runTimes.items():
-                mean = statistics.mean(times)
-                stdev = statistics.stdev(times)
-                resultContent.append(f"{sortName} mean: {mean:.4f} ms, standard deviation: {stdev:.4f}\n")
+        for sortName, times in runTimes.items():
+            mean = statistics.mean(times)
+            stdev = statistics.stdev(times)
+            resultContent.append(f"{sortName} mean: {mean:.4f} ms, standard deviation: {stdev:.4f}\n")
 
-            # Write results to file
-            writeFilePath = os.path.join(writeDir, size, sortType, f"{size}_{sortType}_results.txt")
-            with open(writeFilePath, 'w') as file:
-                file.writelines(resultContent)
+        writeFilePath = os.path.join(writeDir, size, sortType, f"{size}_{sortType}_results.txt")
+        with open(writeFilePath, 'w') as file:
+            file.writelines(resultContent)
      
 # Calls appropriate sort and measures execution time of said sort
 def sortAndMeasure(integers, sortFunc):
@@ -71,17 +80,88 @@ def sortAndMeasure(integers, sortFunc):
 
 # Sorts a list of integers using quicksort
 def quickSort(integers):
-  sorted(integers) # Test implementation
+    if len(integers) <= 1: 
+        return integers
+    pivot = integers[len(integers) // 2]
+    left = [x for x in integers if x < pivot]
+    middle = [x for x in integers if x == pivot]
+    right = [x for x in integers if x > pivot]
+    return quickSort(left) + middle + quickSort(right)
 
 # Sorts a list of integers using mergesort
 def mergeSort(integers):
-  sorted(integers) # Test implementation
+    if len(integers) > 1:
+      mid = len(integers) // 2  # Finding the mid of the array
+      L = integers[:mid]  # Dividing the array elements into 2 halves
+      R = integers[mid:]
+
+      mergeSort(L)  # Sorting the first half
+      mergeSort(R)  # Sorting the second half
+
+      i = j = k = 0
+
+      # Copy data to temp arrays L[] and R[]
+      while i < len(L) and j < len(R):
+          if L[i] < R[j]:
+              integers[k] = L[i]
+              i += 1
+          else:
+              integers[k] = R[j]
+              j += 1
+          k += 1
+
+      # Checking if any element was left
+      while i < len(L):
+          integers[k] = L[i]
+          i += 1
+          k += 1
+
+      while j < len(R):
+          integers[k] = R[j]
+          j += 1
+          k += 1
+
+# Helper function for heapSort
+def heapify(arr, n, i):
+    largest = i  # Initialize largest as root
+    l = 2 * i + 1  # left = 2*i + 1
+    r = 2 * i + 2  # right = 2*i + 2
+
+    # See if left child of root exists and is greater than root
+    if l < n and arr[l] > arr[largest]:
+        largest = l
+
+    # See if right child of root exists and is greater than the largest so far
+    if r < n and arr[r] > arr[largest]:
+        largest = r
+
+    # Change root, if needed
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]  # swap
+
+        # Heapify the root.
+        heapify(arr, n, largest)
 
 # Sorts a list of integers using heapsort
 def heapSort(integers):
-  sorted(integers) # Test implementation
+    n = len(integers)
+
+    # Build a maxheap
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(integers, n, i)
+
+    # One by one extract elements
+    for i in range(n-1, 0, -1):
+        integers[i], integers[0] = integers[0], integers[i]  # swap
+        heapify(integers, i, 0)
 
 # Check if being run directly or imported
 if __name__ == "__main__":
-    createResultsDirectories()
-    processTextFiles()
+    startTime = time.perf_counter()
+    print("Custom sort started...")
+    main()
+    endTime = time.perf_counter()
+    runTimeS = (endTime - startTime)
+    runTimeMin = runTimeS / 60
+    runTimeMS = runTimeS * 1000
+    print(f"Execution time: {runTimeMS:.2f} ms or {runTimeS:.2f} sec or {runTimeMin:.2f} min")
