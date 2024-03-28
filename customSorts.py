@@ -80,17 +80,28 @@ def sortAndMeasure(integers, sortFunc):
 
 # Sorts a list of integers using quicksort
 def quickSort(integers):
-    if len(integers) <= 1: 
+    if len(integers) <= 1: # len of 0 or 1 don't need to be sorted
         return integers
-    pivot = integers[len(integers) // 2]
+    
+    first = integers[0]
+    middle = integers[len(integers) // 2]
+    last = integers[len(integers) - 1]
+    
+    # Sorting and picking middle element to find median of three
+    medianOfThree = sorted([first, middle, last])[1]
+    
+    # Using the median of three as the pivot
+    pivot = medianOfThree
+    
     left = [x for x in integers if x < pivot]
     middle = [x for x in integers if x == pivot]
     right = [x for x in integers if x > pivot]
+    
     return quickSort(left) + middle + quickSort(right)
 
 # Sorts a list of integers using mergesort
 def mergeSort(integers):
-    if len(integers) > 1:
+    if len(integers) > 1: # Stop the recursive call once we've split down to single elements
       mid = len(integers) // 2  # Finding the mid of the array
       L = integers[:mid]  # Dividing the array elements into 2 halves
       R = integers[mid:]
@@ -124,8 +135,8 @@ def mergeSort(integers):
 # Helper function for heapSort
 def heapify(arr, n, i):
     largest = i  # Initialize largest as root
-    l = 2 * i + 1  # left = 2*i + 1
-    r = 2 * i + 2  # right = 2*i + 2
+    l = 2 * i + 1  # left = 2 * i + 1
+    r = 2 * i + 2  # right = 2 * i + 2
 
     # See if left child of root exists and is greater than root
     if l < n and arr[l] > arr[largest]:
